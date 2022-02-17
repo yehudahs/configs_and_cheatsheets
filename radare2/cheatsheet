@@ -1,0 +1,17 @@
+website:
+https://github.com/radareorg/radare2
+
+install radare2 (best to download the sources, build and install)
+
+
+
+install plugins:
+r2pm init
+r2pm update
+
+
+some of the most installed plugins:
+iaito
+need to run this command first:
+sudo apt install qttools5-dev-tools qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5svg5-dev make g++ pkg-config
+
