@@ -23,8 +23,19 @@ sudo apt install qttools5-dev-tools qtbase5-dev qtchooser qt5-qmake qtbase5-dev-
 
 important commands:
 
+---------------------------------------------------------------------
 r2 command for displaying the value of args/locals in the debugger
 > afvd 
 
+[0x00400526]> afvd
+var local_14h = 0x7fff2eab16ac  0x2eab17a000000001   ........
+var local_20h = 0x7fff2eab16a0  0x00007fff2eab17a8   ........ @rsp rsi stack R W 0x7fff2eab21ec --> stack R W 0x74756f2e612f2e (./a.out) --> ascii
+var local_8h = 0x7fff2eab16b8  0x0000000000000041   A....... ascii
+var local_4h = 0x7fff2eab16bc  0x0040057000000000   ....p.@.
+
+[0x00400526]> .afvd local_14h   # note the dot
+var local_14h = 0x7fff2eab16ac  0x2eab17a000000001   ........
+
+---------------------------------------------------------------------
 print memory
 > x/8x @0x80483d0
