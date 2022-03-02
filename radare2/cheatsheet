@@ -45,6 +45,7 @@ print memory
 esil:
 s <address> ; seek to the wanted address.
 aeim ; initialize esil memory
+aeip ; set the instruction pointer at the 'seek' location
 aer ; print the registers in the begining of the <address>
 aesu <address> ; step until <address>
 aer ; check the registers again to and find the right calc or if the calculation was saved in address you can look at address by running pf d @ <address> or pf d @ ebp-0xc
