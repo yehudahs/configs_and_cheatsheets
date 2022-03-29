@@ -20,6 +20,7 @@ Plugin 'bling/vim-airline'
 Plugin 'frazrepo/vim-rainbow'
 Plugin 'micha/vim-colors-solarized'
 Plugin 'https://github.com/tabnine/YouCompleteMe.git'
+Plugin 'fatih/vim-go'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
