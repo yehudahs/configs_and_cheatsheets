@@ -1,0 +1,4 @@
+post installing the plugin via vundle need to run the next command
+
+for installing go binaries
+> :GoInstallBinaries
