@@ -1,0 +1,20 @@
+for first installtation run the next script
+it will install the iso into the disk
+
+#!/bin/sh
+
+qemu-system-x86_64 -boot d -cdrom ~/Downloads/ubuntu-20.04.4-desktop-amd64.iso  -m 10
+
+
+
+next remove the iso and run without graphics.
+
+
+#!/bin/sh
+exec qemu-system-x86_64 \
+     -m 10G -smp 2 \
+     -drive file=/Users/yehuda/Downloads/coregasm/disk1.img,format=qcow2,cache=unsafe,if=none \
+     -append "root=/dev/sda1 console=ttyAMA0" \
+     -netdev user,id=unet,hostfwd=tcp:127.0.0.1:2222-:22 \
+     -device virtio-net-device,netdev=unet \
+     -nographic
