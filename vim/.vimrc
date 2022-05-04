@@ -16,23 +16,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'https://github.com/tpope/vim-fugitive'
 Plugin 'morhetz/gruvbox'
 Plugin 'Syntastic'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'frazrepo/vim-rainbow'
 Plugin 'micha/vim-colors-solarized'
 Plugin 'https://github.com/tabnine/YouCompleteMe.git'
-Plugin 'fatih/vim-go'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,19 +38,20 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "
-
+" this configuration is for syntastic
+" taken from https://github.com/vim-syntastic/syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_enable_signs=1
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
+
 autocmd vimenter * ++nested colorscheme gruvbox
 set tags+=./TAGS;/,../TAGS,c:\tags\TAGS
 
-au BufWritePost *.c,*.cpp,*.h,*.go silent! !ctags -R &
 
 
 " " Disable compatibility with vi which can cause unexpected issues.
@@ -138,19 +128,95 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+nnoremap <Leader>l :ls<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
+" It's useful to show the buffer number in the status line.
+set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+let c = 1
+while c <= 99
+  execute "nnoremap " . c . "gb :" . c . "b\<CR>"
+  let c += 1
+endwhile
+
+" taken from buffer article:
+" https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+"
+"" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+"" This allows buffers to be hidden if you've modified a buffer.
+"" This is almost a must if you wish to use buffers in this way.
+"set hidden
+"
+"" To open a new empty buffer
+"" This replaces :tabnew which I used to bind to this mapping
+"nmap <leader>T :enew<cr>
+"
+"" Move to the next buffer
+"nmap <leader>l :bnext<CR>
+"
+"" Move to the previous buffer
+"nmap <leader>h :bprevious<CR>
+"
+"" Close the current buffer and move to the previous one
+"" This replicates the idea of closing a tab
+"nmap <leader>bq :bp <BAR> bd #<CR>
+"
+"" Show all open buffers and their status
+"nmap <leader>bl :ls<CR>
+"
 
 " taken from https://github.com/preservim/nerdtree
-" Start NERDTree. If a file is specified, move the cursor to its window.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 
-" Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+nnoremap <F> :GoDebugStop<CR>
+nnoremap <S-F5> :GoDebugStop<CR>
 
-nnoremap <C-b> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+" vim-go configs
+" let g:go_debug_windows = {
+"             \ 'vars':       'leftabove 30vnew',
+"            \ 'stack':      'leftabove 20new',
+"             \ 'goroutines': 'botright 10new',
+"             \ 'out':        'botright 5new',
+"   \ }
+
+let g:go_debug_windows = {
+    \ 'vars':       'rightbelow 60vnew',
+    \ 'stack':      'rightbelow 10new',
+    \ 'goroutines': 'rightbelow 10new',
+    \ 'out':        'botright 10new',
+\ }
+let g:go_fmt_command = "gofmt"
+let g:go_fmt_autosave = 0
+
+au BufWritePost *.c,*.cpp,*.h,*.go,*.py,*.m silent! !ctags -R --exclude="*.symbolsmap.h" . &
+
+
+nnoremap <silent> <C-p> :Files<CR>
+
+" save and restore sessions
+map <F2> :mksession! ~/vim_session <cr> " Quick write session with F2
+map <F3> :source ~/vim_session <cr>     " And load session with F3
+
+
+
