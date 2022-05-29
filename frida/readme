@@ -1,0 +1,7 @@
+//trace NSLog
+frida-trace -U main_x -i "*NSLog*"
+
+//print backtrace.
+console.log('CCCryptorCreate called from:\n' +
+         Thread.backtrace(this.context, Backtracer.ACCURATE)
+         .map(DebugSymbol.fromAddress).join('\n') + '\n');
