@@ -68,6 +68,7 @@ return packer.startup(function(use)
       require("onedarkpro").setup()
     end
   })
+  use "morhetz/gruvbox"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
