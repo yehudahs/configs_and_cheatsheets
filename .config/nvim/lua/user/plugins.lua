@@ -77,7 +77,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
-  use {"ycm-core/YouCompleteMe", run='python3 install.py --all'}
+  --[[ use {"ycm-core/YouCompleteMe", run='python3 install.py --all'} ]]
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -101,6 +101,9 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+
+  -- Debugger
+  use "puremourning/vimspector"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

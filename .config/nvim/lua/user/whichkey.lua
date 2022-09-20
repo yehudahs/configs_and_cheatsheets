@@ -96,6 +96,17 @@ local mappings = {
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
 
+  d = {
+    name = "Debug",
+    d = { "<cmd>call vimspector#Launch()<cr>", "Launch"},
+    R = { "<cmd>call vimspector#Reset()<cr>", "Clear Debug Session"},
+    c = { "<cmd>call vimspector#Continue()<cr>", "Continue"},
+    b = { "<cmd>call vimspector#ToggleBreakpoint()<cr>", "Toggle Breakpoint"},
+    B = { "<cmd>call vimspector#ClearBreakpoints()<cr>", "Clear Breakpoints"},
+    r = { "<Plug>VimspectorRestart", "Restart debug session"},
+    i = { "<Plug>VimspectorBalloonEval", "Inspect under the curser"}
+  },
+
   p = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -139,7 +150,7 @@ local mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format({async = true, tabSize = 4 })<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
