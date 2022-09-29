@@ -104,6 +104,7 @@ local mappings = {
     b = { "<cmd>call vimspector#ToggleBreakpoint()<cr>", "Toggle Breakpoint"},
     B = { "<cmd>call vimspector#ClearBreakpoints()<cr>", "Clear Breakpoints"},
     r = { "<Plug>VimspectorRestart", "Restart debug session"},
+    s = { "<Plug>VimspectorStop", "Stop debug session"},
     i = { "<Plug>VimspectorBalloonEval", "Inspect under the curser"}
   },
 

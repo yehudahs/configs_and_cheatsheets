@@ -5,5 +5,4 @@ vim.cmd [[
     nmap <Leader>dl <Plug>VimspectorStepInto
     nmap <Leader>dj <Plug>VimspectorStepOver
     nmap <Leader>di <Plug>VimspectorBalloonEval
-    xmap <Leader>di <Plug>VimspectorBalloonEval
 ]]
