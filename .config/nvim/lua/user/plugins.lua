@@ -69,6 +69,9 @@ return packer.startup(function(use)
     end
   })
   use "morhetz/gruvbox"
+  
+  -- highlight word under curser
+  use "dominikduda/vim_current_word"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin

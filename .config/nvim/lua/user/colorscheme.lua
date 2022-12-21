@@ -6,3 +6,9 @@ catch /^Vim\%((\a\+)\)\=:E185/
   set background=dark
 endtry
 ]]
+
+vim.cmd [[
+    hi CurrentWord ctermbg=237
+    hi CurrentWordTwins ctermbg=237
+    hi CurrentWordTwins cterm=underline
+]]

@@ -250,6 +250,11 @@ _G.packer_plugins = {
     path = "/Users/yehuda/.local/share/nvim/site/pack/packer/start/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
   },
+  vim_current_word = {
+    loaded = true,
+    path = "/Users/yehuda/.local/share/nvim/site/pack/packer/start/vim_current_word",
+    url = "https://github.com/dominikduda/vim_current_word"
+  },
   vimspector = {
     loaded = true,
     path = "/Users/yehuda/.local/share/nvim/site/pack/packer/start/vimspector",
